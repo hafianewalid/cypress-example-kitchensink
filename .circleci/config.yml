@@ -4,6 +4,7 @@
 # for non-orb configuration see old commit
 # https://github.com/cypress-io/cypress-example-kitchensink/blob/aabb10cc1bb9dee88e1bf28e0af5e9661427ee7a/circle.yml
 
+
 # to use CircleCI orbs need to use version >= 2.1
 version: 2.1
 orbs:
