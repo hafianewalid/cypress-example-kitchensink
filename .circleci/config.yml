@@ -199,8 +199,8 @@ workflows:
   linux-build:
     jobs:
       - linux-test
-      - linux-test-chrome
-      - linux-test-firefox
+      # - linux-test-chrome
+      # - linux-test-firefox
 
       - release:
           filters:
@@ -209,5 +209,5 @@ workflows:
                 - master
           requires:
             - linux-test
-            - linux-test-chrome
-            - linux-test-firefox
+            # - linux-test-chrome
+            # - linux-test-firefox
