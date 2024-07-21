@@ -127,7 +127,7 @@ jobs:
       - run: npx cypress info
       - run:
           name: 'Run Cypress tests'
-          command: npx cypress run --group 'Mac build'
+          command: npx cypress run
           no_output_timeout: '1m'
 
   linux-test:
@@ -140,7 +140,7 @@ jobs:
           post-install: 'npm run build'
       - run:
           name: 'Run Cypress tests'
-          command: npx cypress run --group '3x-electron on CircleCI'
+          command: npx cypress run
           no_output_timeout: '1m'
       - run: npx cypress cache path
       - run: npx cypress cache list
@@ -161,7 +161,7 @@ jobs:
           install-browsers: true
       - run:
           name: 'Run Cypress tests'
-          command: npx cypress run --browser chrome --group '2x-chrome on CircleCI'
+          command: npx cypress run --browser chrome
           no_output_timeout: '1m'
 
   linux-test-firefox:
@@ -174,7 +174,7 @@ jobs:
           install-browsers: true
       - run:
           name: 'Run Cypress tests'
-          command: npx cypress run --browser firefox --group '2x-firefox on CircleCI'
+          command: npx cypress run --browser firefox
           no_output_timeout: '1m'
 
   release:
