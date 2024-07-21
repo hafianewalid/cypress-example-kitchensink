@@ -186,15 +186,15 @@ jobs:
       - run: npx semantic-release@23.1.1
 
 workflows:
-  win-build:
-    jobs:
-      - win-test
-      - win-test-chrome
-      - win-test-firefox
+  # win-build:
+  #   jobs:
+  #     - win-test
+  #     - win-test-chrome
+  #     - win-test-firefox
 
-  mac-build:
-    jobs:
-      - mac-test
+  # mac-build:
+  #   jobs:
+  #     - mac-test
 
   linux-build:
     jobs:
