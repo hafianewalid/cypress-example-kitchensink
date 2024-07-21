@@ -125,9 +125,10 @@ jobs:
       - run: npx cypress cache path
       - run: npx cypress cache list
       - run: npx cypress info
-      - cypress/run-tests:
-          start-command: 'npm run start'
-          cypress-command: 'npx cypress run --group Mac build'
+      - run:
+          name: 'Run Cypress tests'
+          command: npx cypress run --group 'Mac build'
+          no_output_timeout: '1m'
 
   linux-test:
     parallelism: 3
@@ -137,9 +138,10 @@ jobs:
     steps:
       - cypress/install:
           post-install: 'npm run build'
-      - cypress/run-tests:
-          start-command: 'npm run start'
-          cypress-command: 'npx cypress run --parallel --group 3x-electron on CircleCI'
+      - run:
+          name: 'Run Cypress tests'
+          command: npx cypress run --group '3x-electron on CircleCI'
+          no_output_timeout: '1m'
       - run: npx cypress cache path
       - run: npx cypress cache list
       - run: npx cypress info
@@ -157,9 +159,10 @@ jobs:
     steps:
       - cypress/install:
           install-browsers: true
-      - cypress/run-tests:
-          start-command: 'npm run start'
-          cypress-command: 'npx cypress run --browser chrome --parallel --group 2x-chrome on CircleCI'
+      - run:
+          name: 'Run Cypress tests'
+          command: npx cypress run --browser chrome --group '2x-chrome on CircleCI'
+          no_output_timeout: '1m'
 
   linux-test-firefox:
     parallelism: 2
@@ -169,9 +172,10 @@ jobs:
     steps:
       - cypress/install:
           install-browsers: true
-      - cypress/run-tests:
-          start-command: 'npm run start'
-          cypress-command: 'npx cypress run --browser firefox --parallel --group 2x-firefox on CircleCI'
+      - run:
+          name: 'Run Cypress tests'
+          command: npx cypress run --browser firefox --group '2x-firefox on CircleCI'
+          no_output_timeout: '1m'
 
   release:
     executor:
