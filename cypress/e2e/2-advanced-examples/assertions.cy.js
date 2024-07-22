@@ -129,7 +129,7 @@ context('Assertions', () => {
        * Text from the first element.
        * @type {string}
       */
-      let text
+      //let text
 
       /**
        * Normalizes passed text,
