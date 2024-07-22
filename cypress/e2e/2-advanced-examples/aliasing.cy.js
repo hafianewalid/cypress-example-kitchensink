@@ -5,18 +5,16 @@ context('Aliasing', () => {
    // cy.visit('http://localhost:8080/commands/aliasing')
   })
 
-  it('Random Failure Test', () => {
-    it('fails randomly', () => {
-      const randomNum = Math.random();
-      const failureRate = 0.5;
-  
-      if (randomNum < failureRate) {
-        expect(true).to.equal(false, `Random failure triggered with number: ${randomNum}`);
-      } else {
-        expect(true).to.equal(true, `Test passed with number: ${randomNum}`);
-      }
-    });
-  });
+  it('fails randomly', () => {
+    const randomNum = Math.random();
+    const failureRate = 0.5;
+
+    if (randomNum < failureRate) {
+      expect(true).to.equal(false, `Random failure triggered with number: ${randomNum}`);
+    } else {
+      expect(true).to.equal(true, `Test passed with number: ${randomNum}`);
+    }
+  })
 
   it('.as() - alias a DOM element for later use', () => {
   //   // https://on.cypress.io/as

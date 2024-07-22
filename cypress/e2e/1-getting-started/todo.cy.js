@@ -21,6 +21,17 @@ describe('example to-do app', () => {
     //cy.visit('http://localhost:8080/todo')
   })
 
+  it('fails randomly', () => {
+    const randomNum = Math.random();
+    const failureRate = 0.5;
+
+    if (randomNum < failureRate) {
+      expect(true).to.equal(false, `Random failure triggered with number: ${randomNum}`);
+    } else {
+      expect(true).to.equal(true, `Test passed with number: ${randomNum}`);
+    }
+  })
+
   it('displays two todo items by default', () => {
     // We use the `cy.get()` command to get all elements that match the selector.
     // Then, we use `should` to assert that there are two matched items,

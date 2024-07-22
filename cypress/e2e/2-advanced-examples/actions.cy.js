@@ -7,8 +7,7 @@ context('Actions', () => {
 
   // https://on.cypress.io/interacting-with-elements
 
- it('Random Failure Test', () => {
-    it('fails randomly', () => {
+  it('fails randomly', () => {
       const randomNum = Math.random();
       const failureRate = 0.5;
   
@@ -17,8 +16,8 @@ context('Actions', () => {
       } else {
         expect(true).to.equal(true, `Test passed with number: ${randomNum}`);
       }
-    });
-  });
+  })
+
 
   it('.type() - type into a DOM element', () => {
     // // https://on.cypress.io/type
