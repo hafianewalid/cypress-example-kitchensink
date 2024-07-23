@@ -154,14 +154,14 @@ jobs:
           post-steps:
             - store_test_results:
                 path: test_results
-      - run: npx cypress cache path
-      - run: npx cypress cache list
-      - run: npx cypress info
-      - run: npx cypress version
-      - run: npx cypress version --component package
-      - run: npx cypress version --component binary
-      - run: npx cypress version --component electron
-      - run: npx cypress version --component node
+      # - run: npx cypress cache path
+      # - run: npx cypress cache list
+      # - run: npx cypress info
+      # - run: npx cypress version
+      # - run: npx cypress version --component package
+      # - run: npx cypress version --component binary
+      # - run: npx cypress version --component electron
+      # - run: npx cypress version --component node
 
   # linux-test-chrome:
   #   parallelism: 2
