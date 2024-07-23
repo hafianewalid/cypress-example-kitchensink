@@ -13,122 +13,122 @@ executors:
       - image: 'cypress/browsers:node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1'
 
 jobs:
-  win-test:
-    working_directory: ~/app
-    executor:
-      name: win/default
-      size: medium
-      shell: bash.exe
-    steps:
-      - checkout
+  # win-test:
+  #   working_directory: ~/app
+  #   executor:
+  #     name: win/default
+  #     size: medium
+  #     shell: bash.exe
+  #   steps:
+  #     - checkout
 
-      - restore_cache:
-          key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+  #     - restore_cache:
+  #         key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
 
-      - run: npm ci
-      - run: npm run cy:verify
-      - run: npm run cy:info
+  #     - run: npm ci
+  #     - run: npm run cy:verify
+  #     - run: npm run cy:info
 
-      - save_cache:
-          key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - C:\Users\circleci\AppData\Local\Cypress\Cache
-            - C:\Users\circleci\AppData\Roaming\npm-cache
+  #     - save_cache:
+  #         key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+  #         paths:
+  #           - C:\Users\circleci\AppData\Local\Cypress\Cache
+  #           - C:\Users\circleci\AppData\Roaming\npm-cache
 
-      - run:
-          name: 'Start server'
-          command: npm run start
-          background: true
+  #     - run:
+  #         name: 'Start server'
+  #         command: npm run start
+  #         background: true
 
-      - run:
-          name: 'Run Cypress tests'
-          command: npm run e2e -- --env circle=true
-          no_output_timeout: '1m'
-      - store_artifacts:
-          path: cypress\screenshots
+  #     - run:
+  #         name: 'Run Cypress tests'
+  #         command: npm run e2e -- --env circle=true
+  #         no_output_timeout: '1m'
+  #     - store_artifacts:
+  #         path: cypress\screenshots
 
-  win-test-chrome:
-    working_directory: ~/app
-    executor:
-      name: win/default
-      size: medium
-      shell: bash.exe
-    steps:
-      - checkout
+  # win-test-chrome:
+  #   working_directory: ~/app
+  #   executor:
+  #     name: win/default
+  #     size: medium
+  #     shell: bash.exe
+  #   steps:
+  #     - checkout
 
-      - restore_cache:
-          key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+  #     - restore_cache:
+  #         key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
 
-      - run: choco install googlechrome --ignore-checksums -y
-      - run: npm ci
-      - run: npm run cy:verify
-      - run: npm run cy:info
+  #     - run: choco install googlechrome --ignore-checksums -y
+  #     - run: npm ci
+  #     - run: npm run cy:verify
+  #     - run: npm run cy:info
 
-      - save_cache:
-          key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - C:\Users\circleci\AppData\Local\Cypress\Cache
-            - C:\Users\circleci\AppData\Roaming\npm-cache
+  #     - save_cache:
+  #         key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+  #         paths:
+  #           - C:\Users\circleci\AppData\Local\Cypress\Cache
+  #           - C:\Users\circleci\AppData\Roaming\npm-cache
 
-      - run:
-          name: 'Start server'
-          command: npm run start
-          background: true
+  #     - run:
+  #         name: 'Start server'
+  #         command: npm run start
+  #         background: true
 
-      - run:
-          name: 'Run Cypress tests'
-          command: npm run e2e:chrome -- --env circle=true
-          no_output_timeout: '1m'
-      - store_artifacts:
-          path: cypress\screenshots
+  #     - run:
+  #         name: 'Run Cypress tests'
+  #         command: npm run e2e:chrome -- --env circle=true
+  #         no_output_timeout: '1m'
+  #     - store_artifacts:
+  #         path: cypress\screenshots
 
-  win-test-firefox:
-    working_directory: ~/app
-    executor:
-      name: win/default
-      size: medium
-      shell: bash.exe
-    steps:
-      - checkout
+  # win-test-firefox:
+  #   working_directory: ~/app
+  #   executor:
+  #     name: win/default
+  #     size: medium
+  #     shell: bash.exe
+  #   steps:
+  #     - checkout
 
-      - restore_cache:
-          key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+  #     - restore_cache:
+  #         key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
 
-      - run: choco install firefox -y
-      - run: npm ci
-      - run: npm run cy:verify
-      - run: npm run cy:info
+  #     - run: choco install firefox -y
+  #     - run: npm ci
+  #     - run: npm run cy:verify
+  #     - run: npm run cy:info
 
-      - save_cache:
-          key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - C:\Users\circleci\AppData\Local\Cypress\Cache
-            - C:\Users\circleci\AppData\Roaming\npm-cache
+  #     - save_cache:
+  #         key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+  #         paths:
+  #           - C:\Users\circleci\AppData\Local\Cypress\Cache
+  #           - C:\Users\circleci\AppData\Roaming\npm-cache
 
-      - run:
-          name: 'Start server'
-          command: npm run start
-          background: true
+  #     - run:
+  #         name: 'Start server'
+  #         command: npm run start
+  #         background: true
 
-      - run:
-          name: 'Run Cypress tests'
-          command: npm run e2e:firefox -- --env circle=true
-          no_output_timeout: '1m'
-      - store_artifacts:
-          path: cypress\screenshots
+  #     - run:
+  #         name: 'Run Cypress tests'
+  #         command: npm run e2e:firefox -- --env circle=true
+  #         no_output_timeout: '1m'
+  #     - store_artifacts:
+  #         path: cypress\screenshots
 
-  mac-test:
-    executor: mac
-    steps:
-      - cypress/install:
-          post-install: "npm run build"
-      - run: npx cypress cache path
-      - run: npx cypress cache list
-      - run: npx cypress info
-      - run:
-          name: 'Run Cypress tests'
-          command: npx cypress run
-          no_output_timeout: '1m'
+  # mac-test:
+  #   executor: mac
+  #   steps:
+  #     - cypress/install:
+  #         post-install: "npm run build"
+  #     - run: npx cypress cache path
+  #     - run: npx cypress cache list
+  #     - run: npx cypress info
+  #     - run:
+  #         name: 'Run Cypress tests'
+  #         command: npx cypress run
+  #         no_output_timeout: '1m'
 
   linux-test:
     parallelism: 3
@@ -157,39 +157,39 @@ jobs:
       - run: npx cypress version --component electron
       - run: npx cypress version --component node
 
-  linux-test-chrome:
-    parallelism: 2
-    executor:
-      name: cypress/default
-      node-version: '20.13.1'
-    steps:
-      - cypress/install:
-          install-browsers: true
-      - run:
-          name: 'Run Cypress tests'
-          command: npx cypress run --browser chrome
-          no_output_timeout: '1m'
+  # linux-test-chrome:
+  #   parallelism: 2
+  #   executor:
+  #     name: cypress/default
+  #     node-version: '20.13.1'
+  #   steps:
+  #     - cypress/install:
+  #         install-browsers: true
+  #     - run:
+  #         name: 'Run Cypress tests'
+  #         command: npx cypress run --browser chrome
+  #         no_output_timeout: '1m'
 
-  linux-test-firefox:
-    parallelism: 2
-    executor:
-      name: cypress/default
-      node-version: '20.13.1'
-    steps:
-      - cypress/install:
-          install-browsers: true
-      - run:
-          name: 'Run Cypress tests'
-          command: npx cypress run --browser firefox
-          no_output_timeout: '1m'
+  # linux-test-firefox:
+  #   parallelism: 2
+  #   executor:
+  #     name: cypress/default
+  #     node-version: '20.13.1'
+  #   steps:
+  #     - cypress/install:
+  #         install-browsers: true
+  #     - run:
+  #         name: 'Run Cypress tests'
+  #         command: npx cypress run --browser firefox
+  #         no_output_timeout: '1m'
 
-  release:
-    executor:
-      name: cypress/default
-      node-version: '20.13.1'
-    steps:
-      - checkout
-      - run: npx semantic-release@23.1.1
+  # release:
+  #   executor:
+  #     name: cypress/default
+  #     node-version: '20.13.1'
+  #   steps:
+  #     - checkout
+  #     - run: npx semantic-release@23.1.1
 
 workflows:
   # win-build:
@@ -208,12 +208,12 @@ workflows:
       # - linux-test-chrome
       # - linux-test-firefox
 
-      - release:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - linux-test
-            # - linux-test-chrome
-            # - linux-test-firefox
+      # - release:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #     requires:
+      #       - linux-test
+      #       # - linux-test-chrome
+      #       # - linux-test-firefox
