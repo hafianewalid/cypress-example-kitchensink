@@ -23,7 +23,7 @@ describe('example to-do app', () => {
 
   it('fails randomly', () => {
     const randomNum = Math.random();
-    const failureRate = 0.5;
+    const failureRate = -1;
 
     if (randomNum < failureRate) {
       expect(true).to.equal(false, `Random failure triggered with number: ${randomNum}`);

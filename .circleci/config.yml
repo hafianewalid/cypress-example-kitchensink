@@ -142,7 +142,7 @@ jobs:
           name: 'Run Cypress tests'
           command: |
             npm install cypress-circleci-reporter
-            TEST_FILES=$(find ./cypress -type f | grep -E ".*[-.](cy|spec)\.(js|ts)$")
+            TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose
           no_output_timeout: '1m'
           post-steps:
