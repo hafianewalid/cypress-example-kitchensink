@@ -138,6 +138,12 @@ jobs:
     steps:
       - cypress/install:
           post-install: 'npm run build'
+
+      - run:
+          name: List Cypress Test Files
+          command: |
+            find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
+
       - run:
           name: 'Run Cypress tests'
           command: |
