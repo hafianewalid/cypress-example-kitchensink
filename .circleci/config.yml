@@ -145,7 +145,7 @@ jobs:
           name: List Cypress Test Files
           command: |
             ls
-            find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
+            #find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
 
       - run:
           name: 'Cypress run tests'
