@@ -147,6 +147,7 @@ jobs:
       - run:
           name: 'Cypress run tests'
           command: |
+            TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             npx cypress run --spec "$TEST_FILES"
 
       - run:
