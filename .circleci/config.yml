@@ -142,7 +142,7 @@ jobs:
       node-version: '20.13.1'
     steps:
       - cypress/install:
-          post-install: 'npm run build'
+          post-install: 'cd e2e && npm run build'
 
       - run:
           name: List Cypress Test Files
