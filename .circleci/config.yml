@@ -145,6 +145,11 @@ jobs:
             find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
 
       - run:
+          name: 'Cypress run tests'
+          command: |
+            npx cypress run --spec "$TEST_FILES"
+
+      - run:
           name: 'Run Cypress tests'
           command: |
             npm install cypress-circleci-reporter
