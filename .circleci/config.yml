@@ -144,11 +144,13 @@ jobs:
       - run:
           name: List Cypress Test Files
           command: |
-            find ./ -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
+            cd e2e
+            find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
 
       - run:
           name: 'Cypress run tests'
           command: |
+            cd e2e
             TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" > test_files.txt
             TEST_FILES=$(cat test_files.txt | tr '\n' ',')
