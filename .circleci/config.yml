@@ -252,7 +252,7 @@ workflows:
   linux-build:
     jobs:
       - test_cd
-      # - linux-test
+      - linux-test
       # - linux-test-chrome
       # - linux-test-firefox
 
