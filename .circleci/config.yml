@@ -135,6 +135,30 @@ jobs:
   #         command: npx cypress run
   #         no_output_timeout: '1m'
 
+  test_cd:
+    docker:
+      - image: cypress/base:12.6.0 
+    steps:
+      - checkout
+      - run:
+          name: Change Directory
+          command: cd dir
+      - run:
+          name: Install Dependencies
+          command: npm ci  # Use npm ci for a clean install of dependencies
+      - run:
+          name: List Cypress Test Files
+          command: |
+            TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
+            echo "$TEST_FILES" > test_files.txt
+      - run:
+          name: Run Cypress Tests
+          command: |
+            TEST_FILES=$(cat test_files.txt | tr '\n' ',')
+            TEST_FILES=${TEST_FILES%,}  # Remove trailing comma
+            npx cypress run --spec "$TEST_FILES"
+
+
   linux-test:
     parallelism: 3
     executor:
@@ -224,7 +248,8 @@ workflows:
 
   linux-build:
     jobs:
-      - linux-test
+      - test_cd
+      # - linux-test
       # - linux-test-chrome
       # - linux-test-firefox
 
