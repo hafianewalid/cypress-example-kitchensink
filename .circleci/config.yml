@@ -141,22 +141,19 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Change Directory
-          command: cd dir
-      - run:
           name: Install Dependencies
-          command: npm install
+          command: cd dir && npm install
       - run:
           name: List Cypress Test Files
           command: |
-            TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
-            echo "$TEST_FILES" > test_files.txt
+            cd dir && TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
+            cd dir && echo "$TEST_FILES" > test_files.txt
       - run:
           name: Run Cypress Tests
           command: |
-            TEST_FILES=$(cat test_files.txt | tr '\n' ',')
-            TEST_FILES=${TEST_FILES%,}  # Remove trailing comma
-            npx cypress run --spec "$TEST_FILES"
+            cd dir && TEST_FILES=$(cat test_files.txt | tr '\n' ',')
+            cd dir && TEST_FILES=${TEST_FILES%,}  # Remove trailing comma
+            cd dir && npx cypress run --spec "$TEST_FILES"
 
 
   linux-test:
