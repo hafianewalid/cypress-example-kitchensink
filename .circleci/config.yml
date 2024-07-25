@@ -141,12 +141,13 @@ jobs:
       name: cypress/default
       node-version: '20.13.1'
     steps:
+      - cypress/install:
+          post-install: 'npm run build'
+
       - run:
           name: List Cypress Test Files
           command: |
-            cd dir
-            ls
-            #find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
+            find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
 
       - run:
           name: 'Cypress run tests'
@@ -158,12 +159,9 @@ jobs:
             npx cypress run --spec "$TEST_FILES"
 
       - run:
-          name: Install coverage reporter
-          command: npm install --save-dev cypress-circleci-reporter
-
-      - run:
           name: 'Run Cypress tests'
           command: |
+            npm install cypress-circleci-reporter
             TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose
           no_output_timeout: '1m'
