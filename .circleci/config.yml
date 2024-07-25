@@ -150,10 +150,12 @@ jobs:
             TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" > test_files.txt
       - run:
+          name: Install coverage reporter
+          command: npm install --save-dev cypress-circleci-reporter     
+      - run:
           name: Run Cypress Tests
           command: |
             cd dir
-            npm install cypress-circleci-reporter
             TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose
           post-steps:
