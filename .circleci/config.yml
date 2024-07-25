@@ -151,7 +151,7 @@ jobs:
             echo "$TEST_FILES" > test_files.txt
       - run:
           name: Install coverage reporter
-          command: npm install --save-dev cypress-circleci-reporter     
+          command: cd dir && npm install --save-dev cypress-circleci-reporter     
       - run:
           name: Run Cypress Tests
           command: |
