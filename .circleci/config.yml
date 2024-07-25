@@ -145,7 +145,7 @@ jobs:
           command: cd dir
       - run:
           name: Install Dependencies
-          command: npm ci  # Use npm ci for a clean install of dependencies
+          command: npm install
       - run:
           name: List Cypress Test Files
           command: |
