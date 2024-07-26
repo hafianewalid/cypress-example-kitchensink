@@ -135,64 +135,64 @@ jobs:
   #         command: npx cypress run
   #         no_output_timeout: '1m'
 
-  # test_cd:
-  #   docker:
-  #     - image: cypress/base:14.17.0
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Install Dependencies
-  #         command: cd dir && npm install
-  #     - run:
-  #         name: List Cypress Test Files
-  #         command: |
-  #           cd dir
-  #           TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
-  #           echo "$TEST_FILES" > test_files.txt
-  #     - run:
-  #         name: Install coverage reporter
-  #         command: cd dir && npm install --save-dev cypress-circleci-reporter     
-  #     - run:
-  #         name: Run Cypress Tests
-  #         command: |
-  #           cd dir
-  #           TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
-  #           echo "$TEST_FILES" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose
-  #     - store_test_results:
-  #         path: test_results
-
-  linux-test:
-    parallelism: 3
-    executor:
-      name: cypress/default
-      node-version: '20.13.1'
+  test_cd:
+    docker:
+      - image: cypress/base:14.17.0
     steps:
-      - cypress/install:
-          post-install: 'npm run build'
-
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: cd dir && npm install
       - run:
           name: List Cypress Test Files
           command: |
-            find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
-
-      # - run:
-      #     name: 'Cypress run tests'
-      #     command: |
-      #       TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
-      #       echo "$TEST_FILES" > test_files.txt
-      #       TEST_FILES=$(cat test_files.txt | tr '\n' ',')
-      #       TEST_FILES=${TEST_FILES%,}
-      #       npx cypress run --spec "$TEST_FILES"
-
+            cd dir
+            TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
+            echo "$TEST_FILES" > test_files.txt
       - run:
-          name: 'Run Cypress tests'
+          name: Install coverage reporter
+          command: cd dir && npm install --save-dev cypress-circleci-reporter     
+      - run:
+          name: Run Cypress Tests
           command: |
-            npm install cypress-circleci-reporter
+            cd dir
             TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose
-          no_output_timeout: '1m'
       - store_test_results:
-          path: test-results
+          path: test_results
+
+      # linux-test:
+      #   parallelism: 3
+      #   executor:
+      #     name: cypress/default
+      #     node-version: '20.13.1'
+      #   steps:
+      #     - cypress/install:
+      #         post-install: 'npm run build'
+
+      #     - run:
+      #         name: List Cypress Test Files
+      #         command: |
+      #           find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)"
+
+      #     # - run:
+      #     #     name: 'Cypress run tests'
+      #     #     command: |
+      #     #       TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
+      #     #       echo "$TEST_FILES" > test_files.txt
+      #     #       TEST_FILES=$(cat test_files.txt | tr '\n' ',')
+      #     #       TEST_FILES=${TEST_FILES%,}
+      #     #       npx cypress run --spec "$TEST_FILES"
+
+      #     - run:
+      #         name: 'Run Cypress tests'
+      #         command: |
+      #           npm install cypress-circleci-reporter
+      #           TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
+      #           echo "$TEST_FILES" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose
+      #         no_output_timeout: '1m'
+      #     - store_test_results:
+      #         path: test-results
       # - run: npx cypress cache path
       # - run: npx cypress cache list
       # - run: npx cypress info
@@ -249,8 +249,8 @@ workflows:
 
   linux-build:
     jobs:
-      # - test_cd
-      - linux-test
+      - test_cd
+      # - linux-test
       # - linux-test-chrome
       # - linux-test-firefox
 
