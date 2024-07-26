@@ -142,24 +142,26 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: cd dir && npm install
+          working_directory: dir
+          command: npm install
       - run:
           name: List Cypress Test Files
+          working_directory: dir
           command: |
-            cd dir
             TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" > test_files.txt
       - run:
           name: Install coverage reporter
-          command: cd dir && npm install --save-dev cypress-circleci-reporter     
+          working_directory: dir
+          command: npm install --save-dev cypress-circleci-reporter     
       - run:
           name: Run Cypress Tests
+          working_directory: dir
           command: |
-            cd dir
             TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose
       - store_test_results:
-          path: dir/test_results
+          path: test_results
 
       # linux-test:
       #   parallelism: 3
