@@ -191,9 +191,8 @@ jobs:
             TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose
           no_output_timeout: '1m'
-          post-steps:
-            - store_test_results:
-                path: test_results
+      - store_test_results:
+          path: test_results
       # - run: npx cypress cache path
       # - run: npx cypress cache list
       # - run: npx cypress info
