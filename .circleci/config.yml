@@ -159,7 +159,7 @@ jobs:
             TEST_FILES=$(find ./cypress -regextype posix-extended -regex ".*[-.](cy|spec).(js|ts)")
             echo "$TEST_FILES" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose
       - store_test_results:
-          path: test_results
+          path: dir/test_results
 
       # linux-test:
       #   parallelism: 3
